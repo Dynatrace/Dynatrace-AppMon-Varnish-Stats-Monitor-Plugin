@@ -75,7 +75,7 @@ You can now see the measure for VarnishStats under "System Monitoring".
 ### Configuration
 
 | Name | Value
-| :--- | .---
+| :--- | :---
 | Username | The username to use for authentication to the restful interface
 | Password | The password for the username used to authenticate to the restful interface.
 | command | (optional) default is "varnish stat -j"
