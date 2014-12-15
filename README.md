@@ -11,24 +11,17 @@ Json format. The plugin then creates the varnish stat measures in dynaTrace by p
 ## Plugin Details
 
 | Name | Varnish Stats Monitor Plugin
+| :--- | :---
 | Author | Jeff Yarbrough
 | Supported dynaTrace Versions | >= 5.5
 | License | [dynaTrace BSD](dynaTraceBSD.txt)
 | Support Level | [Not Supported ](https://community.compuwareapm.com/community/display/DL/Support+Levels#SupportLevels-Community)  
+| Release History | 2013-07-25 Initial Release
 | Download | [varnishstat.1.0.7](com.dynatrace.diagnostics.plugin.varnish_1.0.7.jar)
 | | [varnishstat.1.0.8](com.dynatrace.diagnostics.plugin.Varnish_1.0.8.jar)
 
 
-
-Installation
-
-Import the plugin into dynaTrace server
-
-Release History
-
-2013-07-25 Initial Release
-
-## Steps:
+## Installation
 
 ### Import Plugin:
 
@@ -81,19 +74,8 @@ You can now see the measure for VarnishStats under "System Monitoring".
 
 ### Configuration
 
-Name
-
-Value
-
-Username
-
-The username to use for authentication to the restful interface
-
-Password
-
-The password for the username used to authenticate to the restful interface.
-
-command
-
-(optional) default is "varnish stat -j"
+| Name | Value
+| Username | The username to use for authentication to the restful interface
+| Password | The password for the username used to authenticate to the restful interface.
+| command | (optional) default is "varnish stat -j"
 
