@@ -77,6 +77,11 @@
       <metric defaultrate="purepath" name="varnish_lck.hcb.locks" unit="number" description="My metric description ..." />
       <metric defaultrate="purepath" name="varnish_lck.vcl.creat" unit="number" description="My metric description ..." />
       <metric defaultrate="purepath" name="varnish_lck.vcl.locks" unit="number" description="Lock Operations" />
+      <metric defaultrate="purepath" name="varnish_n_wrk_failed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_wrk_max" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_wrk_drop" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_wrk_queued" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_lru_nuked" unit="ms" description="My metric description ..." />
     </metricgroup>
   </extension>
 </plugin>
