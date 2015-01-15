@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<!-- plugin.xml file written by dynaTrace Client 5.5.0 -->
+<plugin>
+  <extension point="com.dynatrace.diagnostics.pdk.pluginconfig" id="com.dynatrace.diagnostics.plugin.Varnish" name="VarnishStats">
+    <information>
+      <category value="" />
+      <displayname value="VarnishStats" />
+      <description value="Pull the varnishstats" />
+      <supportlevel value="unsupported" />
+    </information>
+    <configuration>
+      <property key="serverUsername" label="Username" type="string" description="My property description ..." default="default" multiline="false" />
+      <property key="serverPassword" label="Password" type="password" description="My property description ..." default="" />
+      <property key="command" label="Command" type="string" description="My property description ..." default="varnishstat -j" multiline="false" />
+    </configuration>
+  </extension>
+  <extension point="com.dynatrace.diagnostics.pdk.monitor" id="com.dynatrace.diagnostics.plugin.Varnish.Monitor" name="VarnishStats">
+    <plugin configid="com.dynatrace.diagnostics.plugin.Varnish" class="com.dynatrace.diagnostics.plugins.varnish.VarnishMonitor" />
+  </extension>
+  <extension point="com.dynatrace.diagnostics.pdk.monitormetricgroup" id="com.dynatrace.diagnostics.plugin.Varnish.Monitor.MetricGroup" name="VarnishStats">
+    <metricgroup monitorid="com.dynatrace.diagnostics.plugin.Varnish.Monitor">
+      <metric defaultrate="purepath" name="varnish_client_conn" unit="number" description="Client connections accepted" />
+      <metric defaultrate="purepath" name="varnish_client_drop" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_client_req" unit="number" description="Client requests received" />
+      <metric defaultrate="purepath" name="varnish_cache_hit" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_cache_hitpass" unit="number" description="Cache hits for pass" />
+      <metric defaultrate="purepath" name="varnish_cache_miss" unit="number" description="Cache misses" />
+      <metric defaultrate="purepath" name="varnish_backend_conn" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_backend_unhealthy" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_backend_busy" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_backend_fail" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_backend_reuse" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_backend_toolate" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_backend_retry" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_head" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_length" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_chunked" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_bad" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_eof" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_close" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_oldhttp" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_zero" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_failed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_1xx" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_204" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_fetch_304" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_sess_mem" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_waitinglist" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_wrk" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_wrk_create" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_expired" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_backend" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_objwrite" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_s_sess" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_s_req" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_s_pipe" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_s_pass" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_s_fetch" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_s_hdrbytes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_s_bodybytes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_sess_closed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_sess_linger" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_sess_herd" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_shm_records" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_shm_writes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_shm_cont" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_backend_req" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_hcb_nolock" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_hcb_lock" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_hcb_insert" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_n_gunzip" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_lck.sms.creat" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_lck.sma.creat" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_lck.sma.locks" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_lck.hcb.creat" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_lck.hcb.locks" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_lck.vcl.creat" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="varnish_lck.vcl.locks" unit="number" description="Lock Operations" />
+    </metricgroup>
+  </extension>
+</plugin>
+
