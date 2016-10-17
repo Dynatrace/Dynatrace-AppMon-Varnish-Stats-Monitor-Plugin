@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: com.dynatrace.diagnostics.plugin.Varnish;singleto
+ n:=true
+Bundle-Version: 1.1.0
+Bundle-Name: VarnishStats
+Bundle-ClassPath: .,lib/jsch-0.1.53.jar,lib/json-simple-1.1.1.jar
+Require-Bundle: com.dynatrace.diagnostics.sdk
+Bundle-ManifestVersion: 2
+Bundle-Vendor: Compuware Corporation
+

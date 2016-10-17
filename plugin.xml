@@ -10,8 +10,17 @@
       <supportlevel value="unsupported" />
     </information>
     <configuration>
+      <property key="authMethod" label="Authentication Method" type="list" description="My property description ..." default="Password">
+        <list>
+          <item value="Password" />
+          <item value="PublicKey" />
+        </list>
+      </property>
       <property key="serverUsername" label="Username" type="string" description="My property description ..." default="default" multiline="false" />
       <property key="serverPassword" label="Password" type="password" description="My property description ..." default="" />
+      <property key="port" label="SSHPort" type="string" description="My property description ..." default="22" multiline="false" />
+      <property key="keyFile" label="KeyFile" type="string" description="The keyfile for the ssh-keypair, e.g. C:/.ssh/id_rsa" default="default" multiline="false" />
+      <property key="publicKeyPassphrase" label="PassPhrase" type="password" description="passphrase for pem file" default="" />
       <property key="command" label="Command" type="string" description="My property description ..." default="varnishstat -j" multiline="false" />
     </configuration>
   </extension>
@@ -20,69 +29,279 @@
   </extension>
   <extension point="com.dynatrace.diagnostics.pdk.monitormetricgroup" id="com.dynatrace.diagnostics.plugin.Varnish.Monitor.MetricGroup" name="VarnishStats">
     <metricgroup monitorid="com.dynatrace.diagnostics.plugin.Varnish.Monitor">
-      <metric defaultrate="purepath" name="varnish_client_conn" unit="number" description="Client connections accepted" />
-      <metric defaultrate="purepath" name="varnish_client_drop" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_client_req" unit="number" description="Client requests received" />
-      <metric defaultrate="purepath" name="varnish_cache_hit" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_cache_hitpass" unit="number" description="Cache hits for pass" />
-      <metric defaultrate="purepath" name="varnish_cache_miss" unit="number" description="Cache misses" />
-      <metric defaultrate="purepath" name="varnish_backend_conn" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_backend_unhealthy" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_backend_busy" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_backend_fail" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_backend_reuse" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_backend_toolate" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_backend_retry" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_head" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_length" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_chunked" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_bad" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_eof" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_close" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_oldhttp" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_zero" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_failed" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_1xx" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_204" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_fetch_304" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_sess_mem" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_waitinglist" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_wrk" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_wrk_create" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_expired" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_backend" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_objwrite" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_s_sess" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_s_req" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_s_pipe" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_s_pass" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_s_fetch" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_s_hdrbytes" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_s_bodybytes" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_sess_closed" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_sess_linger" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_sess_herd" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_shm_records" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_shm_writes" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_shm_cont" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_backend_req" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_hcb_nolock" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_hcb_lock" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_hcb_insert" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_gunzip" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_lck.sms.creat" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_lck.sma.creat" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_lck.sma.locks" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_lck.hcb.creat" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_lck.hcb.locks" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_lck.vcl.creat" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_lck.vcl.locks" unit="number" description="Lock Operations" />
-      <metric defaultrate="purepath" name="varnish_n_wrk_failed" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_wrk_max" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_wrk_drop" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_wrk_queued" unit="number" description="My metric description ..." />
-      <metric defaultrate="purepath" name="varnish_n_lru_nuked" unit="ms" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.uptime" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sess_conn" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sess_drop" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sess_fail" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.client_req_400" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.client_req_417" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.client_req" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.cache_hit" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.cache_hitpass" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.cache_miss" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.backend_conn" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.backend_unhealthy" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.backend_busy" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.backend_fail" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.backend_reuse" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.backend_recycle" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.backend_retry" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_head" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_length" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_chunked" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_eof" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_bad" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_none" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_1xx" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_204" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_304" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_failed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.fetch_no_thread" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.pools" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.threads" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.threads_limited" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.threads_created" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.threads_destroyed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.threads_failed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.thread_queue_len" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.busy_sleep" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.busy_wakeup" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.busy_killed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sess_queued" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sess_dropped" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_object" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_vampireobject" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_objectcore" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_objecthead" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_waitinglist" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_backend" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_expired" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_lru_nuked" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_lru_moved" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.losthdr" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_sess" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_req" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_pipe" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_pass" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_fetch" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_synth" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_req_hdrbytes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_req_bodybytes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_resp_hdrbytes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_resp_bodybytes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_pipe_hdrbytes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_pipe_in" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.s_pipe_out" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sess_closed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sess_closed_err" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sess_readahead" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sess_herd" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_rem_close" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_req_close" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_req_http10" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_rx_bad" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_rx_body" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_rx_junk" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_rx_overflow" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_rx_timeout" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_tx_pipe" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_tx_error" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_tx_eof" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_resp_close" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_overload" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_pipe_overflow" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.sc_range_short" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.shm_records" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.shm_writes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.shm_flushes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.shm_cont" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.shm_cycles" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.backend_req" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_vcl" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_vcl_avail" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_vcl_discard" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_completed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_obj" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_req" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_added" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_deleted" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_tested" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_obj_killed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_lurker_tested" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_tests_tested" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_lurker_tests_tested" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_lurker_obj_killed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_dups" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_lurker_contention" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_persisted_bytes" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.bans_persisted_fragmentation" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_purges" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_obj_purged" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.exp_mailed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.exp_received" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.hcb_nolock" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.hcb_lock" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.hcb_insert" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.esi_errors" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.esi_warnings" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.vmods" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_gzip" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.n_gunzip" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.vsm_free" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.vsm_used" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.vsm_cooling" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.vsm_overflow" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MAIN.vsm_overflowed" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="MGT.uptime" unit="number" description="" />
+      <metric defaultrate="purepath" name="MGT.child_start" unit="number" description="" />
+      <metric defaultrate="purepath" name="MGT.child_exit" unit="number" description="" />
+      <metric defaultrate="purepath" name="MGT.child_stop" unit="number" description="" />
+      <metric defaultrate="purepath" name="MGT.child_died" unit="number" description="" />
+      <metric defaultrate="purepath" name="MGT.child_dump" unit="number" description="" />
+      <metric defaultrate="purepath" name="MGT.child_panic" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.live" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.pool" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.sz_wanted" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.sz_actual" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.allocs" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.frees" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.recycle" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.timeout" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.toosmall" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.surplus" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.busyobj.randry" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.live" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.pool" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.sz_wanted" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.sz_actual" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.allocs" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.frees" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.recycle" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.timeout" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.toosmall" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.surplus" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req0.randry" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.live" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.pool" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.sz_wanted" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.sz_actual" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.allocs" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.frees" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.recycle" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.timeout" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.toosmall" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.surplus" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess0.randry" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.live" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.pool" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.sz_wanted" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.sz_actual" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.allocs" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.frees" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.recycle" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.timeout" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.toosmall" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.surplus" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.req1.randry" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.live" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.pool" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.sz_wanted" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.sz_actual" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.allocs" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.frees" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.recycle" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.timeout" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.toosmall" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.surplus" unit="number" description="" />
+      <metric defaultrate="purepath" name="MEMPOOL.sess1.randry" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.s0.c_req" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.s0.c_fail" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.s0.c_bytes" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.s0.c_freed" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.s0.g_alloc" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.s0.g_bytes" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.s0.g_space" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.Transient.c_req" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.Transient.c_fail" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.Transient.c_bytes" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.Transient.c_freed" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.Transient.g_alloc" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.Transient.g_bytes" unit="number" description="" />
+      <metric defaultrate="purepath" name="SMA.Transient.g_space" unit="number" description="" />
+      <metric defaultrate="purepath" name="VBE.boot.default.happy" unit="number" description="" />
+      <metric defaultrate="purepath" name="VBE.boot.default.bereq_hdrbytes" unit="number" description="" />
+      <metric defaultrate="purepath" name="VBE.boot.default.bereq_bodybytes" unit="number" description="" />
+      <metric defaultrate="purepath" name="VBE.boot.default.beresp_hdrbytes" unit="number" description="" />
+      <metric defaultrate="purepath" name="VBE.boot.default.beresp_bodybytes" unit="number" description="" />
+      <metric defaultrate="purepath" name="VBE.boot.default.pipe_hdrbytes" unit="number" description="" />
+      <metric defaultrate="purepath" name="VBE.boot.default.pipe_out" unit="number" description="" />
+      <metric defaultrate="purepath" name="VBE.boot.default.pipe_in" unit="number" description="" />
+      <metric defaultrate="purepath" name="VBE.boot.default.conn" unit="number" description="" />
+      <metric defaultrate="purepath" name="VBE.boot.default.req" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.backend.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.backend.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.backend.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.backend_tcp.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.backend_tcp.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.backend_tcp.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.ban.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.ban.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.ban.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.busyobj.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.busyobj.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.busyobj.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.cli.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.cli.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.cli.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.exp.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.exp.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.exp.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.hcb.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.hcb.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.hcb.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.lru.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.lru.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.lru.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.mempool.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.mempool.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.mempool.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.objhdr.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.objhdr.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.objhdr.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.pipestat.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.pipestat.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.pipestat.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.sess.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.sess.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.sess.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.smp.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.smp.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.smp.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vbe.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vbe.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vbe.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vcapace.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vcapace.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vcapace.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vcl.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vcl.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vcl.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vxid.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vxid.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.vxid.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.waiter.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.waiter.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.waiter.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.wq.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.wq.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.wq.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.wstat.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.wstat.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.wstat.locks" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.sma.creat" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.sma.destroy" unit="number" description="" />
+      <metric defaultrate="purepath" name="LCK.sma.locks" unit="number" description="" />
     </metricgroup>
   </extension>
 </plugin>
-
